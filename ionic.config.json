@@ -1,0 +1,7 @@
+{
+  "name": "get-token-admin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
