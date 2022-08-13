@@ -18,26 +18,24 @@ const TokenList: React.FC = () => {
     });
 
     let today = new Date();
-    const currentDate = moment(today).format('L');
-    console.log(currentDate);
+    const currentDate = moment(today).format("DD-MM-YYYY");
 
     const getTokensList = async () => {
         const response = await axios.get(`http://localhost:5000/tokens`);
         if (response.status === 200) {
             const data = response.data.filter((x: any) => x.userEmail === UserService.getUserId());
             setTokenList(data);
-            console.log(data);
         }
     }
 
     const clinicToken = tokenList && tokenList.filter((x: any) => x.tokenDate === currentDate);
 
     const updateToken = async (data: any) => {
-        console.log(data);
         data.tokenNumber = '1';
         const response = await axios.put(`http://localhost:5000/token/${data.id}`, data);
         if (response.status === 200) {
             alert('Success.!');
+            getTokensList();
         } else {
             alert('Failed.! try again later');
         }

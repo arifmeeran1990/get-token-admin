@@ -51,17 +51,14 @@ const Profile: React.FC = () => {
     // const userFullName = userFirstName && userFirstName + ' ' + userLastName;
     const userFullName = UserService.getFirstName() + ' ' + UserService.getLastName();
     const email = UserService.getUserId();
-    console.log(email);
 
     let getCurrentProfileData;
     const getProfileByID = async () => {
-        console.log(UserService.getUserId());
         const response = await axios.get(`http://localhost:5000/profiles`);
         if (response.status === 200) {
             if (response.data) {
                 getCurrentProfileData = response.data.find((profile: any) => profile.email === UserService.getUserId());
                 setProfileDataByEmail(getCurrentProfileData);
-                console.log(getCurrentProfileData);
             }
         }
     }
@@ -82,7 +79,6 @@ const Profile: React.FC = () => {
     }
 
     const onSubmit = (data: any) => {
-        console.log(data);
         addProfile(data);
     };
 
